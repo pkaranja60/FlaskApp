@@ -5,4 +5,36 @@
 
 {% block content %}
 This page is descriptive  about your company's Employees
+<br>
+<h1 style="text-align: center">Employee Data</h1>
+<table class="table table-hover table-dark">
+   <thead>
+   <tr>
+      <!-- Columns go HERE -->
+      <th scope="col">Employee_id</th>
+       <th scope="col">Username</th>
+       <th scope="col">First_name</th>
+       <th scope="col">Last_name</th>
+       <th scope="col">Email_address</th>
+       <th scope="col">Department</th>
+   </tr>
+   </thead>
+   <tbody>
+   <!-- Rows go HERE: -->
+   <tr>
+      <td>Value for employee_id</td>
+       <td>Value for username</td>
+       <td>Value for first_name</td>
+       <td>Value for last_name</td>
+       <td>Value for email_address</td>
+       <td>Value for department</td>
+
+   </tr>
+   </tbody>
+</table>
+ <style>
+      body {
+      font-size:14px;
+      }
+   </style>
 {% endblock %}
