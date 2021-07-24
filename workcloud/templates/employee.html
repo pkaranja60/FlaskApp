@@ -11,7 +11,7 @@ This page is descriptive  about your company's Employees
    <thead>
    <tr>
       <!-- Columns go HERE -->
-      <th scope="col">Employee_id</th>
+       <th scope="col">Employee_id</th>
        <th scope="col">Username</th>
        <th scope="col">First_name</th>
        <th scope="col">Last_name</th>
@@ -20,16 +20,16 @@ This page is descriptive  about your company's Employees
    </tr>
    </thead>
    <tbody>
-   <!-- Rows go HERE: -->
-   <tr>
-      <td>Value for employee_id</td>
-       <td>Value for username</td>
-       <td>Value for first_name</td>
-       <td>Value for last_name</td>
-       <td>Value for email_address</td>
-       <td>Value for department</td>
-
-   </tr>
+        <!-- Rows go HERE: -->
+      {% for user in user %}
+          <td>{{ user.employee_id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.email_address }}</td>
+          <td>{{ user.department }}</td>
+        </tr>
+      {% endfor %}
    </tbody>
 </table>
  <style>

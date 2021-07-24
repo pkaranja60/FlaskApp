@@ -11,4 +11,4 @@ class User(db.Model):
     department = db.Column(db.String(length=30), nullable=False, unique=False)
 
     def __repr__(self):
-        return f'User{self.username}'
+        return f'User{self.department}'
