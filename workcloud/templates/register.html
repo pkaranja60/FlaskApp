@@ -5,7 +5,7 @@ Register page
 
 {% block content %}
 <body>
-<div class="container" style="position: relative;">
+<div class="container">
     <form method="POST" class="form-register" style="color:black">
         {{ form.hidden_tag() }}
         <h3>Create your WorkCloud Account</h3>
@@ -20,7 +20,7 @@ Register page
             <div class="col">
                 <div class="col-md-12">
                     {{ form.company.label() }}
-                    {{ form.company(class="form-control", placeholder="Company") }}
+                    {{ form.company(class="form-control", placeholder="Company/Institution") }}
                 </div>
             </div>
         </div>
@@ -77,6 +77,14 @@ Register page
         </div>
         <br>
         {{ form.submit(class="btn btn-lg btn-success") }}
+        <br>
+        <br>
+          <div class="checkbox mb-3">
+            <h6>
+                Have have an account?
+            </h6>
+            <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Login</a>
+        </div>
     </form>
 </div>
 </body>
