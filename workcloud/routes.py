@@ -34,7 +34,7 @@ def login_page():
             flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
             return redirect(url_for('employee_page'))
         else:
-            flash('Employee ID/Company/Username/Password are not matched! Please try again', category='danger')
+            flash('Either Employee ID/Company/Username/Password are not matched! Please try again', category='danger')
     return render_template('login.html', form=form)
 
 
