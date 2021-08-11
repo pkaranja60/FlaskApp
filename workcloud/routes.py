@@ -1,5 +1,5 @@
 from workcloud import app
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, session, Response
 from workcloud.models import User
 from workcloud.forms import RegisterForm, LoginForm
 from workcloud import db
@@ -11,7 +11,8 @@ def home_page():
     return render_template('home.html')
 
 
-@app.route('/employee')
+# protect a view with a principal for that need
+@app.route('/employee', methods=['GET', 'POST'])
 def employee_page():
     user = User.query.all()
     return render_template('employee.html', user=user)
@@ -21,11 +22,15 @@ def employee_page():
 def login_page():
     form = LoginForm()
     if form.validate_on_submit():
-        attempted_user = User.query.filter_by(username=form.username.data).first()
+        attempted_user = User.query.filter_by(username=form.username.data,
+                                              employee_id=form.employee_id.data,
+                                              company=form.company.data
+                                              ).first()
         if attempted_user and attempted_user.check_password_correction(
                 attempted_password=form.password.data
         ):
             login_user(attempted_user)
+            session['logged_in'] = True
             flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
             return redirect(url_for('employee_page'))
         else:

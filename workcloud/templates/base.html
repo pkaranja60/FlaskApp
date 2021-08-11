@@ -19,7 +19,7 @@
 <!-- Navbar here -->
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" style="font-size: 40px; color: #e5ffff">
+    <a class="navbar-brand" href="{{ url_for('home_page') }}" style="font-size: 40px; color: #e5ffff">
         <i class="fas fa-cloud ">WorkCloud</i>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -33,6 +33,7 @@
                     </i>
                 </a>
             </li>
+            {% if current_user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('employee_page') }}">
                     <i class="far fa-id-badge">
@@ -40,6 +41,7 @@
                     </i>
                 </a>
             </li>
+            {% endif %}
         </ul>
         {% if current_user.is_authenticated %}
         <ul class="navbar-nav">
@@ -89,7 +91,7 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://kit.fontawesome.com/1260b62394.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

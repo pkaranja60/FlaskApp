@@ -8,6 +8,13 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+class Company(db.Model):
+    employee_id = db.Column(db.String(length=15), primary_key=True)
+    first_name = db.Column(db.String(length=30), nullable=False)
+    last_name = db.Column(db.String(length=30), nullable=False)
+    Department = db.Column(db.String(length=30), nullable=False)
+
+
 class User(db.Model, UserMixin):
     company = db.Column(db.String(length=30), nullable=False)
     employee_id = db.Column(db.String(length=15), primary_key=True)
@@ -18,7 +25,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(length=50), nullable=False)
 
     def get_id(self):
-        return(self.employee_id)
+        return self.employee_id
 
     def __repr__(self):
         return f'User{self.company}'
@@ -33,3 +40,4 @@ class User(db.Model, UserMixin):
 
     def check_password_correction(self, attempted_password):
         return flask_bcrypt.check_password_hash(self.password_hash, attempted_password)
+
