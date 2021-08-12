@@ -6,6 +6,7 @@ from workcloud import db
 from flask_login import login_user, logout_user
 
 
+
 @app.route('/home')
 def home_page():
     return render_template('home.html')
