@@ -1,10 +1,9 @@
 from workcloud import app
-from flask import render_template, redirect, url_for, flash, session, Response
+from flask import render_template, redirect, url_for, flash, session
 from workcloud.models import User
 from workcloud.forms import RegisterForm, LoginForm
 from workcloud import db
 from flask_login import login_user, logout_user
-
 
 
 @app.route('/home')

@@ -5,4 +5,41 @@
 
 {% block content %}
 This page decrypts your company's Employees performance
+ {% if current_user.is_authenticated %}
+<div class="container">
+   <canvas id="myChart"></canvas>
+</div>
+<script>
+   let myChart = document.getElementById('myChart').getContext('2d');
+
+   let performanceChart = new Chart(myChart, {
+   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   data:{
+      labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
+      datasets:[{
+      label:'performance',
+      data:[
+      617594,
+      181045,
+      153060,
+      106519
+      ],
+      //backgroundColor:'green',
+      backgroundColor:[
+      'pink',
+      'cyan',
+      'violet',
+      'yellow'
+      ]
+      }]
+   },
+   options:{}
+   });
+</script>
+<style>
+   .id{
+   position: left;
+   }
+</style>
+{% endif %}
 {% endblock %}
