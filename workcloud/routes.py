@@ -19,6 +19,12 @@ def employee_page():
     return render_template('employee.html', user=user)
 
 
+@app.route('/new employee', methods=['GET', 'POST'])
+@login_required
+def new_page():
+    return render_template('new.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
     form = LoginForm()

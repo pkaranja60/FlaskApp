@@ -5,6 +5,18 @@
 
 {% block content %}
 This page is descriptive  about your company's Employees
+<nav class="navbar navbar-expand-sm navbar-light " style="background: #f6f0e8;">
+ <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto" style="font-size: 18px">
+           <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('new_page') }}">
+                    <i class="fas fa-user-plus">New Employee
+                    </i>
+                </a>
+            </li>
+      </ul>
+ </div>
+</nav>
 <br>
 <h1 style="text-align: center">Employee Data</h1>
 <table class="table table-hover table-dark">
