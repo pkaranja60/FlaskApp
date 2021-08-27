@@ -8,6 +8,7 @@ Register page
 <div class="container">
     <form method="POST" class="form-register" style="color:black">
         {{ form.hidden_tag() }}
+         {{ form.csrf_token() }}
         <h3>Create your WorkCloud Account</h3>
         <br>
         <div class="form-group row">
@@ -28,19 +29,19 @@ Register page
             <div class="col">
                 <div class="col-md-10">
                     {{ form.username.label() }}
-                    {{ form.username(class="form-control" , placeholder="User Name" ) }}
+                    {{ form.username(class="form-control" , placeholder="UserName" ) }}
                 </div>
             </div>
             <div class="col">
                 <div class="col-md-10">
                     {{ form.first_name.label() }}
-                    {{ form.first_name(class="form-control" , placeholder="User Name" ) }}
+                    {{ form.first_name(class="form-control" , placeholder="First Name" ) }}
                 </div>
             </div>
             <div class="col">
                 <div class="col-md-10">
                     {{ form.last_name.label() }}
-                    {{ form.last_name(class="form-control" , placeholder="User Name" ) }}
+                    {{ form.last_name(class="form-control" , placeholder="Last Name" ) }}
                 </div>
             </div>
         </div>
@@ -98,5 +99,6 @@ Register page
     justify-content: center;
     align-items: center;
     align-content: space-between
-    }  
+    }
+</style>
 {% endblock %}

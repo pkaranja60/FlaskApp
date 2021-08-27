@@ -1,7 +1,7 @@
 from workcloud import app
 from flask import render_template, redirect, url_for, flash, session
 from workcloud.models import User
-from workcloud.forms import RegisterForm, LoginForm
+from workcloud.forms import RegisterForm, LoginForm, NewEmployee
 from workcloud import db
 from flask_login import login_user, logout_user, login_required
 
@@ -22,7 +22,8 @@ def employee_page():
 @app.route('/new employee', methods=['GET', 'POST'])
 @login_required
 def new_page():
-    return render_template('new.html')
+    form = NewEmployee()
+    return render_template('new.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])

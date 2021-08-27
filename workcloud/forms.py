@@ -33,3 +33,10 @@ class LoginForm(FlaskForm):
     username = StringField(label='User Name:', validators=[DataRequired()])
     password = PasswordField(label='Password:', validators=[DataRequired()])
     submit = SubmitField(label='Sign In')
+
+
+class NewEmployee(FlaskForm):
+    employee_id = StringField(label='Employee Id:', validators=[Length(min=5, max=15), DataRequired()])
+    first_name = StringField(label='First Name:', validators=[DataRequired()])
+    last_name = StringField(label='Last Name:', validators=[DataRequired()])
+    submit = SubmitField(label='Add Employee')

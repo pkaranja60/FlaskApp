@@ -5,7 +5,7 @@
 
 {% block content %}
 This page is descriptive  about your company's Employees
-<nav class="navbar navbar-expand-sm navbar-light " style="background: #f6f0e8;">
+<nav class="navbar navbar-expand-sm navbar-light justify-content-between" style="background: #f6f0e8;">
  <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto" style="font-size: 18px">
            <li class="nav-item active">
@@ -15,6 +15,10 @@ This page is descriptive  about your company's Employees
                 </a>
             </li>
       </ul>
+     <form class="form-inline">
+         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+     </form>
  </div>
 </nav>
 <br>
@@ -34,6 +38,7 @@ This page is descriptive  about your company's Employees
    <tbody>
         <!-- Rows go HERE: -->
       {% for user in user %}
+        <tr>
           <td>{{ user.employee_id }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.first_name }}</td>
