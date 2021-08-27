@@ -1,5 +1,6 @@
 import flask_bcrypt
-from workcloud import db, login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from workcloud import db, login_manager, app
 from flask_login import UserMixin
 
 
@@ -23,6 +24,19 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(length=30), nullable=False)
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=50), nullable=False)
+
+    def get_token(self, expires_sec=300):
+        serial = Serializer(app.config['SECRET_KEY'], expires_in=expires_sec)
+        return serial.dumps({'user_id': self.employee_id}).decode('utf-8')
+
+    @staticmethod
+    def verify_token(token):
+        serial = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = serial.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def get_id(self):
         return self.employee_id

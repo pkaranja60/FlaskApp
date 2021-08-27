@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+Reset Password
+{% endblock %}
+
+{% block content %}
+<h3>Reset Password</h3>
+<br>
+<div class="col-xs-10 col-sm-6 col-md-6 ml-auto mr-auto">
+<div class="card card-style mb-2">
+    <div class="card-body">
+          <form method="POST" class="form-sign in" style="color:black">
+              {{ form.hidden_tag() }}
+              {{ form.csrf_token() }}
+              <fieldset class="form-group">
+                   <div class="form-group">
+                    {{ form.email_address.label() }}
+                    {{ form.email_address(class="form-control" , placeholder="Email Address" ) }}
+                </div>
+                  <br>
+                  {{ form.submit(class="btn btn-sm btn-info") }}
+              </fieldset>
+          </form>
+    </div>
+</div>
+</div>
+<style>
+    body{
+    background: #f2f2f2;
+    text-align: center;
+    }
+</style>
+{% endblock %}

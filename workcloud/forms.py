@@ -48,3 +48,14 @@ class NewEmployee(FlaskForm):
                                    ('Inventory Manager', 'Inventory Manager')]
                        )
     submit = SubmitField(label='Add Employee')
+
+
+class RequestResetForm(FlaskForm):
+    email_address = StringField(label='Email Address:', validators=[DataRequired()])
+    submit = SubmitField(label='Reset Password')
+
+
+class PasswordResetForm(FlaskForm):
+    password1 = PasswordField(label='Password:', validators=[Length(min=8), DataRequired()])
+    password2 = PasswordField(label='Confirm Password:', validators=[EqualTo('password1'), DataRequired()])
+    submit = SubmitField(label='Reset Password')
