@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash, session
 from workcloud.models import User
 from workcloud.forms import RegisterForm, LoginForm
 from workcloud import db
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 
 @app.route('/home')
@@ -13,6 +13,7 @@ def home_page():
 
 # protect a view with a principal for that need
 @app.route('/employee', methods=['GET', 'POST'])
+@login_required
 def employee_page():
     user = User.query.all()
     return render_template('employee.html', user=user)

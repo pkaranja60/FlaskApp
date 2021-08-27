@@ -9,5 +9,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///employee.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+login_manager.login_view = "login_page"
+login_manager.login_message = f'You must be Logged in to view this page'
+login_manager.login_message_category = "warning"
 
 from workcloud import routes

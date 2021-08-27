@@ -83,7 +83,7 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
 {% for category, message in messages %}
-<div class="alert alert-{{ category }} alert-dismissible fade in" role="alert">
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     {{ message }}
 </div>
@@ -108,19 +108,12 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 <style>
       body {
       color: black
       }
-
-
-
-
-
-
-
 
 </style>
 </html>
