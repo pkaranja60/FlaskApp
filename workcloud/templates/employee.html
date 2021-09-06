@@ -1,57 +1,71 @@
 {% extends 'base.html' %}
 {% block title %}
-   Employee page
+Employee page
 {% endblock %}
 
 {% block content %}
 This page is descriptive  about your company's Employees
 <nav class="navbar navbar-expand-sm navbar-light justify-content-between" style="background: #f6f0e8;">
- <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto" style="font-size: 18px">
-           <li class="nav-item active">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto" style="font-size: 18px">
+            <li class="nav-item active">
                 <a class="nav-link" href="{{ url_for('new_page') }}">
                     <i class="fas fa-user-plus">New Employee
                     </i>
                 </a>
             </li>
-      </ul>
-     <form class="form-inline">
-         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-     </form>
- </div>
+        </ul>
+        <form class="form-inline">
+                <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+                    <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
 </nav>
 <br>
 <h1 style="text-align: center">Employee Data</h1>
 <table class="table table-hover table-dark">
-   <thead>
-   <tr>
-      <!-- Columns go HERE -->
-       <th scope="col">Employee_id</th>
-       <th scope="col">Username</th>
-       <th scope="col">First_name</th>
-       <th scope="col">Last_name</th>
-       <th scope="col">Email_address</th>
-       <th scope="col">Company</th>
-   </tr>
-   </thead>
-   <tbody>
-        <!-- Rows go HERE: -->
-      {% for user in user %}
-        <tr>
-          <td>{{ user.employee_id }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.last_name }}</td>
-          <td>{{ user.email_address }}</td>
-          <td>{{ user.company }}</td>
-        </tr>
-      {% endfor %}
-   </tbody>
+    <thead>
+    <tr>
+        <!-- Columns go HERE -->
+        <th scope="col">Employee id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Company</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Rows go HERE: -->
+    {% for user in user %}
+    {% include 'includes/employee_modals.html' %}
+    <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.category }}</td>
+        <td>{{ user.company }}</td>
+        <td>
+          <a href="#" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#Modal-Details-{{ user.employee_id }}">
+              Details
+          </a>
+            <a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#Modal-Delete-{{ user.employee_id }}">
+              Delete
+          </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
 </table>
- <style>
+<style>
       body {
       font-size:14px;
       }
-   </style>
+
+
+</style>
+{% block javascript %}
+
+{% endblock %}
 {% endblock %}

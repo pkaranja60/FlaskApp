@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from workcloud.models import User
 
@@ -39,14 +39,15 @@ class NewEmployee(FlaskForm):
     employee_id = StringField(label='Employee Id:', validators=[Length(min=5, max=15), DataRequired()])
     first_name = StringField(label='First Name:', validators=[DataRequired()])
     last_name = StringField(label='Last Name:', validators=[DataRequired()])
-    type = SelectField('Type', validators=[DataRequired()],
-                       choices=[('', ''),
-                                ('Teacher', 'Teacher'),
-                                ('Secretary', 'Secretary'),
-                                 ('Casual Worker', 'Casual Worker'),
-                                  ('Accountant', 'Accountant'),
-                                   ('Inventory Manager', 'Inventory Manager')]
-                       )
+    category = SelectField('Category', validators=[DataRequired()],
+                           choices=[('', ''),
+                                    ('Teacher', 'Teacher'),
+                                    ('Secretary', 'Secretary'),
+                                    ('Casual Worker', 'Casual Worker'),
+                                    ('Accountant', 'Accountant'),
+                                    ('Inventory Manager', 'Inventory Manager')]
+                           )
+    description = TextAreaField(label='Job Description', validators=[DataRequired()])
     submit = SubmitField(label='Add Employee')
 
 

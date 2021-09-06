@@ -6,33 +6,38 @@ New Employee
 {% block content %}
 <h3>Add New Employee</h3>
 <br>
-<div class="col-xs-10 col-sm-6 col-md-6 ml-auto mr-auto">
-<div class="card card-style mb-2">
-    <div class="card-body">
-          <form method="POST" class="form-sign in" style="color:black">
-              {{ form.hidden_tag() }}
-              {{ form.csrf_token() }}
-              <fieldset class="form-group">
-                   <div class="form-group">
-                    {{ form.employee_id.label() }}
-                    {{ form.employee_id(class="form-control" , placeholder="Employee id" ) }}
-                </div>
-                   <div class="form-group">
-                    {{ form.first_name.label() }}
-                    {{ form.first_name(class="form-control" , placeholder="First Name" ) }}
-                </div>
-                   <div class="form-group">
-                    {{ form.last_name.label() }}
-                    {{ form.last_name(class="form-control" , placeholder="Last Name" ) }}
-                </div>
-                  <div class="form-group">
-                      {{ form.type.label() }}
-                      {{ form.type(class="form-control") }}
-                  </div>
-                  <br>
-                  {{ form.submit(class="btn btn-sm btn-info") }}
-              </fieldset>
-          </form>
+<div class="col-xs-8 col-sm-6 col-md-6 ml-auto mr-auto">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <form method="POST" class="form-sign in" style="color:black">
+                {{ form.hidden_tag() }}
+                {{ form.csrf_token() }}
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        {{ form.employee_id.label() }}
+                        {{ form.employee_id(class="form-control" , placeholder="Employee id" ) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.first_name.label() }}
+                        {{ form.first_name(class="form-control" , placeholder="First Name" ) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.last_name.label() }}
+                        {{ form.last_name(class="form-control" , placeholder="Last Name" ) }}
+                    </div>
+                    <div class="form-group">
+                                {{ form.category.label() }}
+                                {{ form.category(class="form-control") }}
+
+                        </div>
+                        <div class="form-group">
+                                {{ form.description.label() }}
+                                {{ form.description(class="form-control", placeholder="Job Description") }}
+                    </div>
+        <br>
+        {{ form.submit(class="btn btn-sm btn-info") }}
+        </fieldset>
+        </form>
     </div>
 </div>
 </div>
@@ -41,5 +46,7 @@ New Employee
     background: #f2f2f2;
     text-align: center;
     }
+
+
 </style>
 {% endblock %}

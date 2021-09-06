@@ -4,11 +4,13 @@ Register page
 {% endblock %}
 
 {% block content %}
+<br>
+<br>
 <body>
-<div class="container">
+<div class="container ml-auto mr-auto">
     <form method="POST" class="form-register" style="color:black">
         {{ form.hidden_tag() }}
-         {{ form.csrf_token() }}
+        {{ form.csrf_token() }}
         <h3>Create your WorkCloud Account</h3>
         <br>
         <div class="form-group row">
@@ -46,8 +48,10 @@ Register page
             </div>
         </div>
         <div class="col">
-            {{ form.email_address.label() }}
-            {{ form.email_address(class="form-control", placeholder="Email Address") }}
+            <div class="col-md-auto">
+                {{ form.email_address.label() }}
+                {{ form.email_address(class="form-control", placeholder="Email Address") }}
+            </div>
         </div>
         <div class="form-group row">
             <div class="col">
@@ -80,7 +84,7 @@ Register page
         {{ form.submit(class="btn btn-lg btn-success") }}
         <br>
         <br>
-          <div class="checkbox mb-3">
+        <div class="checkbox mb-3">
             <h6>
                 Have have an account?
             </h6>
@@ -94,11 +98,14 @@ Register page
     background-color: #ccffff;
     }
     .container{
+    background: #f2f2f2;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     align-content: space-between
+    background: #f2f2f2;
     }
+
 </style>
 {% endblock %}

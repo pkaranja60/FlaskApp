@@ -1,16 +1,40 @@
 {% extends 'base.html' %}
 {% block title %}
-   Home page
+Home page
 {% endblock %}
 
 {% block content %}
 This page decrypts your company's Employees performance
- {% if current_user.is_authenticated %}
+{% if current_user.is_authenticated %}
+
+
 <div class="container">
-   <canvas id="myChart"></canvas>
+    <canvas id="myChart"></canvas>
 </div>
+<br>
+<div class="form-group row">
+    <div class="col">
+        <div class="col-md-12">
+            <div class="card-body">
+                <canvas id="selfChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md-12">
+            <div class="card-body">
+                <canvas id="userChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% block Javascript %}
 <script>
    let myChart = document.getElementById('myChart').getContext('2d');
+   let selfChart = document.getElementById('selfChart').getContext('2d');
+   let userChart = document.getElementById('userChart').getContext('2d');
 
    let performanceChart = new Chart(myChart, {
    type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
@@ -19,10 +43,10 @@ This page decrypts your company's Employees performance
       datasets:[{
       label:'performance',
       data:[
-      617594,
+      50000,
       181045,
       153060,
-      106519
+      150000
       ],
       //backgroundColor:'green',
       backgroundColor:[
@@ -35,11 +59,53 @@ This page decrypts your company's Employees performance
    },
    options:{}
    });
+
+    let IndividualPerformanceChart = new Chart(selfChart, {
+   type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   data:{
+      labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
+      datasets:[{
+      label:'performance',
+      data:[
+      50000,
+      181045,
+      ],
+      //backgroundColor:'green',
+      backgroundColor:[
+      'violet',
+      'yellow'
+      ]
+      }]
+   },
+   options:{}
+   });
+
+    let PerformanceLineChart = new Chart(userChart, {
+   type:'radar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   data:{
+      labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
+      datasets:[{
+      label:'performance',
+      data:[
+      50000,
+      181045,
+      ],
+      //backgroundColor:'green',
+      backgroundColor:[
+      'violet',
+      'yellow'
+      ]
+      }]
+   },
+   options:{}
+   });
+
 </script>
+{% endblock %}
 <style>
-   .id{
-   position: left;
-   }
+    .container{
+    padding-down: 10px;
+    
+    }
 </style>
-{% endif %}
 {% endblock %}

@@ -1,6 +1,6 @@
 from workcloud import app
 from flask import render_template, redirect, url_for, flash, session
-from workcloud.models import User
+from workcloud.models import User, Employee
 from workcloud.forms import RegisterForm, LoginForm, NewEmployee, RequestResetForm, PasswordResetForm
 from workcloud import db, mail
 from flask_login import login_user, logout_user, login_required
@@ -16,14 +16,27 @@ def home_page():
 @app.route('/employee', methods=['GET', 'POST'])
 @login_required
 def employee_page():
-    user = User.query.all()
-    return render_template('employee.html', user=user)
+    employee = Employee.query.all()
+    return render_template('employee.html', user=employee)
 
 
 @app.route('/new employee', methods=['GET', 'POST'])
 @login_required
 def new_page():
     form = NewEmployee()
+    if form.validate_on_submit():
+        user_to_create = Employee(employee_id=form.employee_id.data,
+                                  first_name=form.first_name.data,
+                                  last_name=form.last_name.data,
+                                  category=form.category.data,
+                                  description=form.description.data)
+        db.session.add(user_to_create)
+        db.session.commit()
+        flash(f'New Employee has been added successfully', category='success')
+        return redirect(url_for('employee_page'))
+    if form.errors != {}:  # If there are not errors from the validations
+        for err_msg in form.errors.values():
+            flash(f'Failed Employee cannot be added : {err_msg}', category='danger')
     return render_template('new.html', form=form)
 
 
@@ -115,3 +128,12 @@ def reset_token(token):
         flash(f'Your Password has been updated. Please Login', category='success')
         return redirect(url_for('login_page'))
     return render_template('password_reset.html', form=form)
+
+
+@app.route('/delete/<int:employee_id>')
+def delete(employee_id):
+    user_to_delete = Employee.query.get_or_404(int(employee_id))
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    flash(f'Employee has been deleted successfully!!', category='success')
+    return redirect(url_for('employee_page'))
