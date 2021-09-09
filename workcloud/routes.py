@@ -9,7 +9,8 @@ from flask_mail import Message
 
 @app.route('/home')
 def home_page():
-    return render_template('home.html')
+    arr=[5000, 2500, 3500]
+    return render_template('home.html', arr=arr)
 
 
 # protect a view with a principal for that need
@@ -24,6 +25,7 @@ def employee_page():
 @login_required
 def new_page():
     form = NewEmployee()
+
     if form.validate_on_submit():
         user_to_create = Employee(employee_id=form.employee_id.data,
                                   first_name=form.first_name.data,

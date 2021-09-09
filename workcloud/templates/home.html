@@ -5,28 +5,36 @@ Home page
 
 {% block content %}
 This page decrypts your company's Employees performance
+<br>
+<br>
+<br>
 {% if current_user.is_authenticated %}
-
-
 <div class="container">
     <canvas id="myChart"></canvas>
 </div>
 <br>
+<br>
+<br>
 <div class="form-group row">
-    <div class="col">
-        <div class="col-md-12">
-            <div class="card-body">
+<div class="col-xs10 col-sm-6 col-md-6">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
                 <canvas id="selfChart"></canvas>
             </div>
         </div>
     </div>
-    <div class="col">
-        <div class="col-md-12">
-            <div class="card-body">
+</div>
+
+<div class="col-xs10 col-sm-6 col-md-6">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
                 <canvas id="userChart"></canvas>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {% endif %}
@@ -35,6 +43,8 @@ This page decrypts your company's Employees performance
    let myChart = document.getElementById('myChart').getContext('2d');
    let selfChart = document.getElementById('selfChart').getContext('2d');
    let userChart = document.getElementById('userChart').getContext('2d');
+  let arr ={{ arr }}
+
 
    let performanceChart = new Chart(myChart, {
    type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
@@ -42,12 +52,7 @@ This page decrypts your company's Employees performance
       labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
       datasets:[{
       label:'performance',
-      data:[
-      50000,
-      181045,
-      153060,
-      150000
-      ],
+      data:arr,
       //backgroundColor:'green',
       backgroundColor:[
       'pink',
@@ -61,7 +66,7 @@ This page decrypts your company's Employees performance
    });
 
     let IndividualPerformanceChart = new Chart(selfChart, {
-   type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
    data:{
       labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
       datasets:[{
@@ -79,17 +84,13 @@ This page decrypts your company's Employees performance
    },
    options:{}
    });
-
     let PerformanceLineChart = new Chart(userChart, {
    type:'radar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
    data:{
       labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
       datasets:[{
       label:'performance',
-      data:[
-      50000,
-      181045,
-      ],
+      data:arr,
       //backgroundColor:'green',
       backgroundColor:[
       'violet',
@@ -100,12 +101,14 @@ This page decrypts your company's Employees performance
    options:{}
    });
 
+
+
+
+
+
 </script>
 {% endblock %}
 <style>
-    .container{
-    padding-down: 10px;
-    
-    }
+
 </style>
 {% endblock %}
