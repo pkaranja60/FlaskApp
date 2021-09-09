@@ -9,27 +9,29 @@ This page decrypts your company's Employees performance
 <br>
 <br>
 {% if current_user.is_authenticated %}
+
 <div class="container">
     <canvas id="myChart"></canvas>
 </div>
+
 <br>
 <br>
 <br>
 <div class="form-group row">
-<div class="col-xs10 col-sm-6 col-md-6">
-    <div class="card card-style mb-2">
+<div class="col-xs8 col-sm-4 col-md-4">
+    <div class="card card-style mb-3">
         <div class="card-body">
-            <div class="chart-container" style="position: relative;">
+            <div class="chart-container" style="position: center;">
                 <canvas id="selfChart"></canvas>
             </div>
         </div>
     </div>
 </div>
 
-<div class="col-xs10 col-sm-6 col-md-6">
+<div class="col-xs10 col-sm-4 col-md-4">
     <div class="card card-style mb-2">
         <div class="card-body">
-            <div class="chart-container" style="position: relative;">
+            <div class="chart-container" style="position: center;">
                 <canvas id="userChart"></canvas>
             </div>
         </div>
@@ -44,6 +46,7 @@ This page decrypts your company's Employees performance
    let selfChart = document.getElementById('selfChart').getContext('2d');
    let userChart = document.getElementById('userChart').getContext('2d');
   let arr ={{ arr }}
+
 
 
    let performanceChart = new Chart(myChart, {
@@ -109,6 +112,19 @@ This page decrypts your company's Employees performance
 </script>
 {% endblock %}
 <style>
+.card-body{
 
+border-radius: 3rem;
+
+}
+p{
+text-size: 14px;
+}
+.container{
+width: 70%;
+}
+.card-body{
+margin-left: 30px;
+}
 </style>
 {% endblock %}
