@@ -11,33 +11,36 @@ This page decrypts your company's Employees performance
 {% if current_user.is_authenticated %}
 
 <div class="container">
-    <canvas id="myChart"></canvas>
-</div>
-
-<br>
-<br>
-<br>
-<div class="form-group row">
-<div class="col-xs8 col-sm-4 col-md-4">
-    <div class="card card-style mb-3">
-        <div class="card-body">
-            <div class="chart-container" style="position: center;">
-                <canvas id="selfChart"></canvas>
-            </div>
-        </div>
+    <div class="chart-cage">
+        <canvas id="myChart"></canvas>
     </div>
 </div>
 
-<div class="col-xs10 col-sm-4 col-md-4">
-    <div class="card card-style mb-2">
-        <div class="card-body">
-            <div class="chart-container" style="position: center;">
-                <canvas id="userChart"></canvas>
-            </div>
-        </div>
+<br>
+<br>
+<br>
+
+<div class="container">
+
+    <div class="chart-container" style="position: center;">
+        <canvas id="selfChart"></canvas>
     </div>
+    <section>
+        <nav>
+            <select class="form-select" aria-label="Default select example">
+                <option selected></option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </nav>
+    </section>
+    <div class="chart-container" style="position: center;">
+        <canvas id="userChart" width="100" height="100"></canvas>
+    </div>
+
 </div>
-</div>
+
 
 {% endif %}
 {% block Javascript %}
@@ -71,7 +74,7 @@ This page decrypts your company's Employees performance
     let IndividualPerformanceChart = new Chart(selfChart, {
    type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
    data:{
-      labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
+      labels:['Teacher', 'Secretary', 'CasualWorker'],
       datasets:[{
       label:'performance',
       data:[
@@ -88,7 +91,7 @@ This page decrypts your company's Employees performance
    options:{}
    });
     let PerformanceLineChart = new Chart(userChart, {
-   type:'radar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
    data:{
       labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
       datasets:[{
@@ -109,6 +112,8 @@ This page decrypts your company's Employees performance
 
 
 
+
+
 </script>
 {% endblock %}
 <style>
@@ -121,10 +126,20 @@ p{
 text-size: 14px;
 }
 .container{
-width: 70%;
+width: 75%;
+margin: 10px auto;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
 }
-.card-body{
-margin-left: 30px;
+.chart-container{
+  width: 45.33%;
+  border: 1.5px solid black;
+  padding: 25px 50px 75px;
+  background-color: lightblue;
+}
+.chart-cage{
+  background: #f2f2f2;
 }
 </style>
 {% endblock %}
