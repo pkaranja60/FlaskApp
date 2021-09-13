@@ -15,53 +15,50 @@ This page is descriptive  about your company's Employees
                 </a>
             </li>
         </ul>
-        <form class="form-inline">
-                <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
-                 <a href="{{ url_for('search', first_name = user.first_name) }}" class="btn btn-outline-info btn-sm" >
-             <i class="fas fa-search"></i>
-          </a>
-        </form>
     </div>
 </nav>
 <br>
 <h1 style="text-align: center">Employee Data</h1>
-<table class="table table-hover table-dark">
-    <thead>
-    <tr>
-        <!-- Columns go HERE -->
-        <th scope="col">Employee id</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Category</th>
-        <th scope="col">Company</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Rows go HERE: -->
-    {% for user in user %}
-    {% include 'includes/employee_modals.html' %}
-    <tr>
-        <th scope="row">{{ loop.index }}</th>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name }}</td>
-        <td>{{ user.category }}</td>
-        <td>{{ user.company }}</td>
-        <td>
-          <a href="#" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#Modal-Details-{{ user.employee_id }}">
-              Details
-          </a>
-            <a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#Modal-Delete-{{ user.employee_id }}">
-              Delete
-          </a>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div class="col-8">
+    <table class="table table-hover table-dark">
+        <thead>
+        <tr>
+            <!-- Columns go HERE -->
+            <th scope="col">Employee id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Rows go HERE: -->
+        {% for user in user %}
+        {% include 'includes/employee_modals.html' %}
+        <tr>
+            <th scope="row">{{ user.employee_id }}</th>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.category }}</td>
+            <td>
+                <a href="#" class="btn btn-outline-info btn-sm" data-toggle="modal"
+                   data-target="#Modal-Details-{{ user.employee_id }}">
+                    Details
+                </a>
+                <a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal"
+                   data-target="#Modal-Delete-{{ user.employee_id }}">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 <style>
       body {
       font-size:14px;
       }
+
 
 
 </style>

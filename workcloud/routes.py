@@ -1,16 +1,20 @@
 from workcloud import app
 from flask import render_template, redirect, url_for, flash, session
 from workcloud.models import User, Employee
-from workcloud.forms import RegisterForm, LoginForm, NewEmployee, RequestResetForm, PasswordResetForm
+from workcloud.forms import RegisterForm, LoginForm, NewEmployee, RequestResetForm, PasswordResetForm, Records
 from workcloud import db, mail
 from flask_login import login_user, logout_user, login_required
 from flask_mail import Message
 
 
+@app.route('/')
+def index_page():
+    return render_template('index.html')
+
+
 @app.route('/home')
 def home_page():
-    arr=[5000, 2500, 3500]
-    return render_template('home.html', arr=arr)
+    return render_template('home.html')
 
 
 # protect a view with a principal for that need
@@ -40,6 +44,21 @@ def new_page():
         for err_msg in form.errors.values():
             flash(f'Failed Employee cannot be added : {err_msg}', category='danger')
     return render_template('new.html', form=form)
+
+
+@app.route('/records', methods=['GET', 'POST'])
+def records_page():
+    form = Records()
+    if form.validate_on_submit():
+        user_to_create = Records(total_lessons=form.total_lessons.data,
+                                 lessons_attended=form.lessons_attended.data,
+                                 lessons_not_attended=form.lessons_not_attended.data,
+                                 lessons_recovered=form.lessons_recovered.data)
+        db.session.add(user_to_create)
+        db.session.commit()
+        flash(f'Data Records has been added', category='success')
+        return redirect(url_for('employee_page'))
+    return render_template('records.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])

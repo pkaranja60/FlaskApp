@@ -10,7 +10,9 @@ def load_user(user_id):
 
 
 class Company(db.Model):
-    company = db.Column(db.String(length=30), primary_key=True, nullable=False)
+    company = db.Column(db.String(length=30), primary_key=True, nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.employee_id'))
+    employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id'))
 
 
 class User(db.Model, UserMixin):
@@ -21,6 +23,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(length=30), nullable=False)
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=50), nullable=False)
+
+    companies = db.relationship('Company', backref='user')
 
     def get_token(self, expires_sec=300):
         serial = Serializer(app.config['SECRET_KEY'], expires_in=expires_sec)
@@ -61,5 +65,19 @@ class Employee(db.Model):
     category = db.Column(db.String(length=30), nullable=False)
     description = db.Column(db.Text(length=256), nullable=False)
 
+    company = db.relationship('Company', backref='employee')
+
     def __repr__(self):
         return f'User{self.employee_id}'
+
+
+class Records(db.Model):
+
+    id = db.Column(db.Integer(), primary_key=True)
+    total_lessons = db.Column(db.Integer(), nullable=False)
+    lessons_attended = db.Column(db.Integer(), nullable=False)
+    lessons_not_attended = db.Column(db.Integer(), nullable=False)
+    lessons_recovered = db.Column(db.Integer(), nullable=False)
+
+
+

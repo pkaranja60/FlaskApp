@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+Update Records
+{% endblock %}
+
+{% block content %}
+<br>
+<h3>Record Update</h3>
+<br>
+<div class="container">
+    <div class="card-body">
+        <form method="POST" class="form-sign in" style="color:black">
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.total_lessons.label() }}
+                    {{ form.total_lessons(class="form-control" , placeholder="Range from 50-210" ) }}
+                </div>
+                <div class="form-group">
+                    {{ form.lessons_attended.label() }}
+                    {{ form.lessons_attended(class="form-control" , placeholder="Range from 50-210" ) }}
+                </div>
+                <div class="form-group">
+                    {{ form.lessons_not_attended.label() }}
+                    {{ form.lessons_not_attended(class="form-control" , placeholder="Range from 50-210" ) }}
+                </div>
+                <div class="form-group">
+                    {{ form.lessons_recovered.label() }}
+                    {{ form.lessons_recovered(class="form-control") }}
+
+                </div>
+                <br>
+                {{ form.submit(class="btn btn-sm btn-info") }}
+            </fieldset>
+        </form>
+    </div>
+</div>
+<style>
+    body{
+    background: #ccffff;
+    text-align: center;
+    }
+    .card-body{
+    border-radius: 2rem;
+    background: #f2f2f2;
+    border: 1.5px solid black;
+    padding: 35px 50px 75px;
+    width: 55%;
+    }
+    .container{
+    display: flex;
+    justify-content: center;
+    }
+
+</style>
+{% endblock %}

@@ -51,6 +51,14 @@ class NewEmployee(FlaskForm):
     submit = SubmitField(label='Add Employee')
 
 
+class Records(FlaskForm):
+    total_lessons = StringField(label='Total Lessons:', validators=[DataRequired()])
+    lessons_attended = StringField(label='Lessons Attended:', validators=[DataRequired()])
+    lessons_not_attended = StringField(label='Lessons Not Attended:', validators=[DataRequired()])
+    lessons_recovered = StringField(label='Lessons Recovered:', validators=[DataRequired()])
+    submit = SubmitField(label='Update Records')
+
+
 class RequestResetForm(FlaskForm):
     email_address = StringField(label='Email Address:', validators=[DataRequired()])
     submit = SubmitField(label='Reset Password')

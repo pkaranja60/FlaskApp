@@ -25,16 +25,6 @@ This page decrypts your company's Employees performance
     <div class="chart-container" style="position: center;">
         <canvas id="selfChart"></canvas>
     </div>
-    <section>
-        <nav>
-            <select class="form-select" aria-label="Default select example">
-                <option selected></option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </nav>
-    </section>
     <div class="chart-container" style="position: center;">
         <canvas id="userChart" width="100" height="100"></canvas>
     </div>
@@ -43,103 +33,5 @@ This page decrypts your company's Employees performance
 
 
 {% endif %}
-{% block Javascript %}
-<script>
-   let myChart = document.getElementById('myChart').getContext('2d');
-   let selfChart = document.getElementById('selfChart').getContext('2d');
-   let userChart = document.getElementById('userChart').getContext('2d');
-  let arr ={{ arr }}
-
-
-
-   let performanceChart = new Chart(myChart, {
-   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-   data:{
-      labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
-      datasets:[{
-      label:'performance',
-      data:arr,
-      //backgroundColor:'green',
-      backgroundColor:[
-      'pink',
-      'cyan',
-      'violet',
-      'yellow'
-      ]
-      }]
-   },
-   options:{}
-   });
-
-    let IndividualPerformanceChart = new Chart(selfChart, {
-   type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-   data:{
-      labels:['Teacher', 'Secretary', 'CasualWorker'],
-      datasets:[{
-      label:'performance',
-      data:[
-      50000,
-      181045,
-      ],
-      //backgroundColor:'green',
-      backgroundColor:[
-      'violet',
-      'yellow'
-      ]
-      }]
-   },
-   options:{}
-   });
-    let PerformanceLineChart = new Chart(userChart, {
-   type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-   data:{
-      labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
-      datasets:[{
-      label:'performance',
-      data:arr,
-      //backgroundColor:'green',
-      backgroundColor:[
-      'violet',
-      'yellow'
-      ]
-      }]
-   },
-   options:{}
-   });
-
-
-
-
-
-
-
-
-</script>
-{% endblock %}
-<style>
-.card-body{
-
-border-radius: 3rem;
-
-}
-p{
-text-size: 14px;
-}
-.container{
-width: 75%;
-margin: 10px auto;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-}
-.chart-container{
-  width: 45.33%;
-  border: 1.5px solid black;
-  padding: 25px 50px 75px;
-  background-color: lightblue;
-}
-.chart-cage{
-  background: #f2f2f2;
-}
-</style>
+{% include 'includes/chartJs_modals.html' %}
 {% endblock %}

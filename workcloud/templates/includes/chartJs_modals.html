@@ -1,0 +1,145 @@
+{% block Javascript %}
+<script>
+   let selfChart = document.getElementById('selfChart').getContext('2d');
+   let userChart = document.getElementById('userChart').getContext('2d');
+
+   window.onload = function() {
+  var ctx = document.getElementById("myChart").getContext("2d");
+  window.myBar = new Chart(ctx, {
+    type: "bar",
+    data: barChartData,
+    options: chartOptions
+  });
+};
+
+<!-- Setup Modal -->
+   var barChartData = {
+  labels: [
+    "Rahab Ndoro",
+    "Simon Mungai",
+    "Stephen Kimani",
+    "Joseph Irungu",
+    "Peter Kabinga",
+    "Margret Githu",
+    "Salome kiarie",
+    "Irene Nyamwaro"
+  ],
+  datasets: [
+    {
+      label: "Total Lessons",
+      backgroundColor: "pink",
+      borderColor: "red",
+      borderWidth: 1,
+      data: [80, 110, 210, 110, 200, 140, 180, 170]
+    },
+    {
+      label: "Lessons Attended",
+      backgroundColor: "lightblue",
+      borderColor: "blue",
+      borderWidth: 1,
+      data: [78, 100, 207, 110, 200, 140, 177, 170,]
+    },
+    {
+      label: "Lessons Not Attended",
+      backgroundColor: "lightgreen",
+      borderColor: "green",
+      borderWidth: 1,
+      data: [2, 10, 3, 0, 0, 0, 3, 0]
+    },
+    {
+      label: "Lessons Recovered",
+      backgroundColor: "yellow",
+      borderColor: "orange",
+      borderWidth: 1,
+      data: [0, 2, 3, 0, 0, 0, 3, 0]
+    }
+  ]
+};
+
+<!-- Config Modal -->
+var chartOptions = {
+  responsive: true,
+  legend: {
+    position: "bottom"
+  },
+  title: {
+    display: true,
+    text: "Employee Performance Chart"
+  },
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      }
+    }]
+  }
+}
+
+<!-- Actions Modal -->
+
+
+
+
+    let IndividualPerformanceChart = new Chart(selfChart, {
+   type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   data:{
+      labels:['Teacher', 'Secretary', 'CasualWorker'],
+      datasets:[{
+      label:'performance',
+      data:[
+      50000,
+      181045,
+      ],
+      //backgroundColor:'green',
+      backgroundColor:[
+      'violet',
+      'yellow'
+      ]
+      }]
+   },
+   options:{}
+   });
+    let PerformanceLineChart = new Chart(userChart, {
+   type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+   data:{
+      labels:['Teacher', 'Secretary', 'CasualWorker', 'Cookers'],
+      datasets:[{
+      label:'performance',
+      data:[
+      15,
+      25,
+      10,],
+      //backgroundColor:'green',
+      backgroundColor:[
+      'violet',
+      'yellow'
+      ]
+      }]
+   },
+   options:{}
+   });
+
+</script>
+{% endblock %}
+<style>
+.container{
+width: 75%;
+margin: 10px auto;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+.chart-container{
+  width: 45.33%;
+  border: 1.5px solid black;
+  padding: 25px 50px 75px;
+  background-color: lightblue;
+}
+.chart-cage{
+  background: #f2f2f2;
+  border: 1.5px solid black;
+  padding: 25px 50px 75px;
+  width: 100%;
+}
+
+</style>
