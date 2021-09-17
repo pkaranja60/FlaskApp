@@ -12,9 +12,10 @@ def index_page():
     return render_template('index.html')
 
 
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def home_page():
-    return render_template('home.html')
+
+    return render_template('home.html', arr=arr)
 
 
 # protect a view with a principal for that need
@@ -31,7 +32,8 @@ def new_page():
     form = NewEmployee()
 
     if form.validate_on_submit():
-        user_to_create = Employee(employee_id=form.employee_id.data,
+        user_to_create = Employee(company_id=form.company_id.data,
+                                  employee_id=form.employee_id.data,
                                   first_name=form.first_name.data,
                                   last_name=form.last_name.data,
                                   category=form.category.data,
@@ -50,7 +52,8 @@ def new_page():
 def records_page():
     form = Records()
     if form.validate_on_submit():
-        user_to_create = Records(total_lessons=form.total_lessons.data,
+        user_to_create = Records(employee_id=form.employee_id.data,
+                                 total_lessons=form.total_lessons.data,
                                  lessons_attended=form.lessons_attended.data,
                                  lessons_not_attended=form.lessons_not_attended.data,
                                  lessons_recovered=form.lessons_recovered.data)
@@ -85,7 +88,7 @@ def login_page():
 def register_page():
     form = RegisterForm()
     if form.validate_on_submit():
-        user_to_create = User(company=form.company.data,
+        user_to_create = User(institution_id=form.institution_id.data,
                               employee_id=form.employee_id.data,
                               username=form.username.data,
                               first_name=form.first_name.data,
@@ -158,3 +161,4 @@ def delete(employee_id):
     db.session.commit()
     flash(f'Employee has been deleted successfully!!', category='success')
     return redirect(url_for('employee_page'))
+

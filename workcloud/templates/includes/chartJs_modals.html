@@ -1,20 +1,26 @@
 {% block Javascript %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js"
+        integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% block content1 %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-   let selfChart = document.getElementById('selfChart').getContext('2d');
-   let userChart = document.getElementById('userChart').getContext('2d');
-
-   window.onload = function() {
-  var ctx = document.getElementById("myChart").getContext("2d");
-  window.myBar = new Chart(ctx, {
-    type: "bar",
-    data: barChartData,
-    options: chartOptions
-  });
-};
-
-<!-- Setup Modal -->
-   var barChartData = {
-  labels: [
+    // setup
+<!-- Color spectrum -->
+   const color = [
+  '#4dc9f6',
+  '#f67019',
+  '#f53794',
+  '#537bc4',
+  '#acc236',
+  '#166a8f',
+  '#00a950',
+  '#58595b',
+  '#8549ba'
+];
+<!-- Defined Labels -->
+    const labels = [
     "Rahab Ndoro",
     "Simon Mungai",
     "Stephen Kimani",
@@ -23,61 +29,122 @@
     "Margret Githu",
     "Salome kiarie",
     "Irene Nyamwaro"
-  ],
-  datasets: [
-    {
-      label: "Total Lessons",
-      backgroundColor: "pink",
-      borderColor: "red",
-      borderWidth: 1,
-      data: [80, 110, 210, 110, 200, 140, 180, 170]
-    },
-    {
+    ];
+
+    const data = {
+      labels: labels,
+      datasets: [
+      {
+        label: 'Total Lessons',
+        data: [80, 110, 210, 110, 200, 140, 177, 170],
+        backgroundColor: [
+          'rgba(255, 26, 104, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(0, 0, 0, 0.2)',
+          'rgba(154, 62, 230, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)',
+          'rgba(154, 62, 230, 1)',
+        ],
+        borderWidth: 1
+      },
+       {
       label: "Lessons Attended",
       backgroundColor: "lightblue",
       borderColor: "blue",
       borderWidth: 1,
       data: [78, 100, 207, 110, 200, 140, 177, 170,]
     },
-    {
+       {
       label: "Lessons Not Attended",
       backgroundColor: "lightgreen",
       borderColor: "green",
       borderWidth: 1,
-      data: [2, 10, 3, 0, 0, 0, 3, 0]
+      data: [2, 10, 3, 0, 0, 0, 3, 0],
+      type: 'line'
     },
-    {
+       {
       label: "Lessons Recovered",
       backgroundColor: "yellow",
       borderColor: "orange",
       borderWidth: 1,
       data: [0, 2, 3, 0, 0, 0, 3, 0]
     }
-  ]
-};
+      ]
+    };
 
-<!-- Config Modal -->
-var chartOptions = {
-  responsive: true,
-  legend: {
-    position: "bottom"
-  },
-  title: {
-    display: true,
-    text: "Employee Performance Chart"
-  },
-  scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
+    // config
+    const config = {
+      responsive: true,
+      type: 'bar',
+      data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
       }
-    }]
-  }
-}
+    };
 
-<!-- Actions Modal -->
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
 
+    function addDataset(){
+        const newDataset = {
+        label: 'Dataset #' + (data.datasets.length +1),
+        data: [1, 2, 3, 4, 5, 6, 7],
+        backgroundColor: 'Color',
+        borderColor: '#B0BF1A',
+        borderWidth: 1
+        };
+        myChart.data.datasets.push(newDataset);
+        myChart.update();
+    }
 
+    function removeDataset(){
+        myChart.data.datasets.pop();
+        myChart.update();
+    }
+
+    function addData(){
+    const newData = {
+    label: 'labels'
+    }
+    myChart.data.labels.push(newData);
+    myChart.update();
+    }
+
+    function removeData(){
+    myChart.data.labels.pop();
+    myChart.update();
+    }
+      // pop = remove the last value of the array
+      // shift = remove the first value of the array
+      // push = adding a value to the end of the array
+      // unshift = add a value at the beginning of the array
+
+</script>
+{% endblock %}
+
+{% block content2 %}
+<script>
+   let selfChart = document.getElementById('selfChart').getContext('2d');
+   let userChart = document.getElementById('userChart').getContext('2d');
 
 
     let IndividualPerformanceChart = new Chart(selfChart, {
@@ -118,6 +185,9 @@ var chartOptions = {
    },
    options:{}
    });
+{% endblock %}
+
+
 
 </script>
 {% endblock %}
@@ -135,11 +205,13 @@ justify-content: space-between;
   padding: 25px 50px 75px;
   background-color: lightblue;
 }
-.chart-cage{
+.chartBox{
   background: #f2f2f2;
   border: 1.5px solid black;
   padding: 25px 50px 75px;
   width: 100%;
 }
+
+
 
 </style>

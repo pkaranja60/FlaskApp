@@ -1,0 +1,105 @@
+   window.onload = function() {
+  var myChart = document.getElementById("myChart").getContext("2d");
+  window.myBar = new Chart(myChart, {
+    type: "bar",
+    data: chartData,
+    options: chartOptions
+  });
+};
+
+<!-- Setup Modal -->
+   var labels = [
+    "Rahab Ndoro",
+    "Simon Mungai",
+    "Stephen Kimani",
+    "Joseph Irungu",
+    "Peter Kabinga",
+    "Margret Githu",
+    "Salome kiarie",
+    "Irene Nyamwaro"
+  ];
+   var chartData = {
+  labels: labels,
+  datasets: [
+    {
+      label: "Total Lessons",
+      backgroundColor: "pink",
+      borderColor: "red",
+      borderWidth: 1,
+      data: [80, 110, 210, 110, 200, 140, 180, 170]
+    },
+    {
+      label: "Lessons Attended",
+      backgroundColor: "lightblue",
+      borderColor: "blue",
+      borderWidth: 1,
+      data: [78, 100, 207, 110, 200, 140, 177, 170,]
+    },
+    {
+      label: "Lessons Not Attended",
+      backgroundColor: "lightgreen",
+      borderColor: "green",
+      borderWidth: 1,
+      data: [2, 10, 3, 0, 0, 0, 3, 0]
+    },
+    {
+      label: "Lessons Recovered",
+      backgroundColor: "yellow",
+      borderColor: "orange",
+      borderWidth: 1,
+      data: [0, 2, 3, 0, 0, 0, 3, 0]
+    }
+  ]
+};
+
+<!-- Config Modal -->
+var chartOptions = {
+  responsive: true,
+  legend: {
+    position: "top"
+  },
+  title: {
+    display: true,
+    text: "Employee Performance Chart"
+  },
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      }
+    }]
+  }
+}
+
+<!-- Actions Modal -->
+    function addDataset(){
+      var newDataset = {
+        label: 'Dataset #' + (chartData.datasets.length + 1),
+        data: [75, 140, 180, 150, 160, 100, 200, 140],
+        backgroundColor: '#B284BE',
+        borderColor: '#B0BF1A',
+        borderWith: 1
+      };
+      myChart.chartData.datasets.push(newDataset);
+      myChart.update();
+      };
+
+      function removeDataset(){
+      myChart.chartData.datasets.pop();
+      myChart.update();
+      };
+
+      function addData(value) {
+      myChart.chartData.datasets[1].data.push(value);
+      myChart.update();
+      };
+
+      function removeData() {
+      myChart.chartData.datasets[1].data.pop();
+      myChart.update();
+      }
+
+      // pop = remove the last value of the array
+      // shift = remove the first value of the array
+      // push = adding a value to the end of the array
+      // unshift = add a value at the beginning of the array
