@@ -16,7 +16,6 @@ class RegisterForm(FlaskForm):
         if email_address:
             raise ValidationError('Email Address already exists! Please try a different email')
 
-    institution_id = StringField(label='Company:', validators=[DataRequired()])
     employee_id = StringField(label='Employee Id:', validators=[Length(min=5, max=15), DataRequired()])
     username = StringField(label='User Name:', validators=[Length(min=2, max=30), DataRequired()])
     first_name = StringField(label='First Name:', validators=[DataRequired()])
@@ -36,7 +35,6 @@ class LoginForm(FlaskForm):
 
 
 class NewEmployee(FlaskForm):
-    company_id = StringField(label='Company ID:', validators=[DataRequired()])
     employee_id = StringField(label='Employee Id:', validators=[Length(min=5, max=15), DataRequired()])
     first_name = StringField(label='First Name:', validators=[DataRequired()])
     last_name = StringField(label='Last Name:', validators=[DataRequired()])

@@ -14,8 +14,7 @@ def index_page():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home_page():
-
-    return render_template('home.html', arr=arr)
+    return render_template('home.html')
 
 
 # protect a view with a principal for that need
@@ -27,7 +26,6 @@ def employee_page():
 
 
 @app.route('/new employee', methods=['GET', 'POST'])
-@login_required
 def new_page():
     form = NewEmployee()
 

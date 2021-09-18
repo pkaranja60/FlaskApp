@@ -1,6 +1,5 @@
 import flask_bcrypt
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-
 from workcloud import db, login_manager, app
 from flask_login import UserMixin
 
@@ -15,8 +14,8 @@ class Company(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False, unique=True)
     company = db.Column(db.String(length=30), nullable=False, unique=True)
 
-    employees = db.relationship('Employee', backref='company', lazy=True)
-    users = db.relationship('User', backref='institution', lazy=True)
+    employee_id = db.Column(db.Integer(), db.ForeignKey('employee.employee_id'), nullable=False)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.employee_id'), nullable=False)
 
 
 class User(db.Model, UserMixin):
@@ -28,7 +27,7 @@ class User(db.Model, UserMixin):
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=50), nullable=False)
 
-    institution_id = db.Column(db.Integer, db.ForeignKey('company.id'))
+    company = db.relationship('Company', backref='user', uselist=False, lazy=True)
 
     def get_token(self, expires_sec=300):
         serial = Serializer(app.config['SECRET_KEY'], expires_in=expires_sec)
@@ -63,14 +62,14 @@ class User(db.Model, UserMixin):
 
 class Employee(db.Model):
 
-    employee_id = db.Column(db.Integer(), primary_key=True)
+    employee_id = db.Column(db.Integer(), primary_key=True, unique=True, nullable=False)
     first_name = db.Column(db.String(length=30), nullable=False)
     last_name = db.Column(db.String(length=30), nullable=False)
     category = db.Column(db.String(length=30), nullable=False)
     description = db.Column(db.Text(length=256), nullable=False)
 
     record = db.relationship('Records', backref='employee', uselist=False, lazy=True)
-    company_id = db.Column(db.Integer, db.ForeignKey('company.id'))
+    company = db.relationship('Company', backref='employee', uselist=False, lazy=True)
 
     def __repr__(self):
         return f'User{self.employee_id}'
@@ -78,7 +77,7 @@ class Employee(db.Model):
 
 class Records(db.Model):
 
-    id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.Integer(), primary_key=True, unique=True, nullable=False)
     total_lessons = db.Column(db.Integer(), nullable=False)
     lessons_attended = db.Column(db.Integer(), nullable=False)
     lessons_not_attended = db.Column(db.Integer(), nullable=False)

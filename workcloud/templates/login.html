@@ -6,27 +6,19 @@ Login page
 {% block content %}
 <body>
 <br>
+<h3>Please Login</h3>
 <br>
 <div class="container">
     <form method="POST" class="form-sign in" style="color:black">
         {{ form.hidden_tag() }}
          {{ form.csrf_token() }}
-        <h3>Please Login</h3>
         <br>
-        <div class="form-group row">
             <div class="col">
-                <div class="col-md-12">
+                <div class="col-md-auto">
                     {{ form.employee_id.label() }}
                     {{ form.employee_id(class="form-control" , placeholder="Employee id" ) }}
                 </div>
             </div>
-            <div class="col">
-                <div class="col-md-12">
-                    {{ form.company.label() }}
-                    {{ form.company(class="form-control", placeholder="Company/Institution") }}
-                </div>
-            </div>
-        </div>
         <div class="col">
             <div class="col-md-auto">
                 {{ form.username.label() }}
@@ -58,9 +50,12 @@ Login page
 <style>
     body{
     background: #f2f2f2;
+    text-align: center;
     }
     .container{
-     background-color: #ccffff;
+    border: 1.5px solid black;
+    border-radius: 3rem;
+    background-color: #ccffff;
     display: flex;
     text-align: center;
     justify-content: center;
