@@ -1,5 +1,7 @@
 import flask_bcrypt
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from sqlalchemy.orm import dynamic
+
 from workcloud import db, login_manager, app
 from flask_login import UserMixin
 
@@ -14,8 +16,8 @@ class Company(db.Model):
     id = db.Column(db.Integer(), primary_key=True, nullable=False, unique=True)
     company = db.Column(db.String(length=30), nullable=False, unique=True)
 
-    employee_id = db.Column(db.Integer(), db.ForeignKey('employee.employee_id'), nullable=False)
-    user_id = db.Column(db.Integer(), db.ForeignKey('user.employee_id'), nullable=False)
+    employees = db.relationship('Employee', backref='company', uselist=False, lazy=True)
+    users = db.relationship('User', backref='company', uselist=False, lazy=True)
 
 
 class User(db.Model, UserMixin):
@@ -27,7 +29,7 @@ class User(db.Model, UserMixin):
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=50), nullable=False)
 
-    company = db.relationship('Company', backref='user', uselist=False, lazy=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
 
     def get_token(self, expires_sec=300):
         serial = Serializer(app.config['SECRET_KEY'], expires_in=expires_sec)
@@ -69,7 +71,7 @@ class Employee(db.Model):
     description = db.Column(db.Text(length=256), nullable=False)
 
     record = db.relationship('Records', backref='employee', uselist=False, lazy=True)
-    company = db.relationship('Company', backref='employee', uselist=False, lazy=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
 
     def __repr__(self):
         return f'User{self.employee_id}'

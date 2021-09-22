@@ -8,8 +8,7 @@ This page decrypts your company's Employees performance
 <br>
 <br>
 <br>
-{% if current_user.is_authenticated %}
-
+ {% if current_user.is_authenticated %}
 <div class="container">
       <div class="chartBox">
         <canvas id="myChart"></canvas>
@@ -23,7 +22,6 @@ This page decrypts your company's Employees performance
         </div>
     </div>
 </div>
-
 
 <br>
 <br>
@@ -39,8 +37,11 @@ This page decrypts your company's Employees performance
     </div>
 
 </div>
-
-
+{% else %}
+<div class='card-content'>
+    <h3 style="text-align: center;">You must be LOGGED IN to view page !</h3>
+</div>
 {% endif %}
+
 {% include 'includes/chartJs_modals.html' %}
 {% endblock %}

@@ -1,15 +1,25 @@
 from workcloud import app
 from flask import render_template, redirect, url_for, flash, session
-from workcloud.models import User, Employee
-from workcloud.forms import RegisterForm, LoginForm, NewEmployee, RequestResetForm, PasswordResetForm, Records
+from workcloud.models import User, Employee, Records, Company
+from workcloud.forms import RegisterForm, LoginForm, NewEmployee, RequestResetForm, \
+    PasswordResetForm, RecordsForm, CompanyForm
 from workcloud import db, mail
 from flask_login import login_user, logout_user, login_required
 from flask_mail import Message
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index_page():
-    return render_template('index.html')
+    form = CompanyForm()
+    if form.validate_on_submit():
+        user_to_create = Company(company=form.company.data,
+                                 id=form.id.data)
+        db.session.add(user_to_create)
+        db.session.commit()
+        print('successful')
+        flash(f'Company/ Institution has been registered proceed to WorkCloud work station', category='success')
+        return redirect(url_for('home_page'))
+    return render_template('company.html', form=form)
 
 
 @app.route('/home', methods=['GET', 'POST'])
@@ -26,9 +36,9 @@ def employee_page():
 
 
 @app.route('/new employee', methods=['GET', 'POST'])
+@login_required
 def new_page():
     form = NewEmployee()
-
     if form.validate_on_submit():
         user_to_create = Employee(company_id=form.company_id.data,
                                   employee_id=form.employee_id.data,
@@ -48,7 +58,7 @@ def new_page():
 
 @app.route('/records', methods=['GET', 'POST'])
 def records_page():
-    form = Records()
+    form = RecordsForm()
     if form.validate_on_submit():
         user_to_create = Records(employee_id=form.employee_id.data,
                                  total_lessons=form.total_lessons.data,
@@ -67,8 +77,7 @@ def login_page():
     form = LoginForm()
     if form.validate_on_submit():
         attempted_user = User.query.filter_by(username=form.username.data,
-                                              employee_id=form.employee_id.data,
-                                              company=form.company.data
+                                              employee_id=form.employee_id.data
                                               ).first()
         if attempted_user and attempted_user.check_password_correction(
                 attempted_password=form.password.data
@@ -86,7 +95,7 @@ def login_page():
 def register_page():
     form = RegisterForm()
     if form.validate_on_submit():
-        user_to_create = User(institution_id=form.institution_id.data,
+        user_to_create = User(company_id=form.company_id.data,
                               employee_id=form.employee_id.data,
                               username=form.username.data,
                               first_name=form.first_name.data,
@@ -119,7 +128,8 @@ def send_mail(user):
    
    {url_for('reset_token', token=token, _external=True)}
     
-    If you did not send a password request, Please ignore this message. Note that no changes will be made to your account.
+    If you did not send a password request, Please ignore this message. 
+    Note that no changes will be made to your account.
 '''
     mail.send(msg)
 
@@ -159,4 +169,3 @@ def delete(employee_id):
     db.session.commit()
     flash(f'Employee has been deleted successfully!!', category='success')
     return redirect(url_for('employee_page'))
-

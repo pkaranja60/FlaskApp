@@ -16,6 +16,7 @@ class RegisterForm(FlaskForm):
         if email_address:
             raise ValidationError('Email Address already exists! Please try a different email')
 
+    company_id = StringField(label='Company ID:', validators=[DataRequired()])
     employee_id = StringField(label='Employee Id:', validators=[Length(min=5, max=15), DataRequired()])
     username = StringField(label='User Name:', validators=[Length(min=2, max=30), DataRequired()])
     first_name = StringField(label='First Name:', validators=[DataRequired()])
@@ -27,7 +28,6 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    company = StringField(label='Company:', validators=[DataRequired()])
     employee_id = StringField(label='Employee_id:', validators=[DataRequired()])
     username = StringField(label='User Name:', validators=[DataRequired()])
     password = PasswordField(label='Password:', validators=[DataRequired()])
@@ -35,6 +35,7 @@ class LoginForm(FlaskForm):
 
 
 class NewEmployee(FlaskForm):
+    company_id = StringField(label='Company Id:', validators=[DataRequired()])
     employee_id = StringField(label='Employee Id:', validators=[Length(min=5, max=15), DataRequired()])
     first_name = StringField(label='First Name:', validators=[DataRequired()])
     last_name = StringField(label='Last Name:', validators=[DataRequired()])
@@ -50,7 +51,7 @@ class NewEmployee(FlaskForm):
     submit = SubmitField(label='Add Employee')
 
 
-class Records(FlaskForm):
+class RecordsForm(FlaskForm):
     employee_id = StringField(label='Employee ID', validators=[DataRequired()])
     total_lessons = StringField(label='Total Lessons:', validators=[DataRequired()])
     lessons_attended = StringField(label='Lessons Attended:', validators=[DataRequired()])
@@ -71,5 +72,6 @@ class PasswordResetForm(FlaskForm):
 
 
 class CompanyForm(FlaskForm):
-    company_id = StringField(label='Company Id', validators=[DataRequired()])
-    company = StringField(label='Company', validators=[DataRequired()])
+    id = StringField(label='Id:', validators=[DataRequired()])
+    company = StringField(label='Company:', validators=[DataRequired()])
+    submit = SubmitField(label='Register')
