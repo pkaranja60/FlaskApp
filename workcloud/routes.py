@@ -15,7 +15,7 @@ def index_page():
 @app.route('/home', methods=['GET', 'POST'])
 def home_page():
 
-    return render_template('home.html', arr=arr)
+    return render_template('home.html')
 
 
 # protect a view with a principal for that need
@@ -70,7 +70,6 @@ def login_page():
     if form.validate_on_submit():
         attempted_user = User.query.filter_by(username=form.username.data,
                                               employee_id=form.employee_id.data,
-                                              company=form.company.data
                                               ).first()
         if attempted_user and attempted_user.check_password_correction(
                 attempted_password=form.password.data
