@@ -1,0 +1,59 @@
+<div class="container">
+
+    <form method="POST" class="form-register" style="color:black">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token() }}
+        <br>
+        <div class="form-group">
+            <div class="col">
+                <div class="col-md-12">
+                    {{ form.company.label() }}
+                    {{ form.company(class="form-control", placeholder="Company/Institution") }}
+                </div>
+            </div>
+              <div class="col">
+                <div class="col-md-12">
+                    {{ form.id.label() }}
+                    {{ form.id(class="form-control", placeholder="Company/Institution Id") }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="col">
+        {{ form.submit(class="btn btn-sm btn-success") }}
+            </div>
+
+        <br>
+    </form>
+</div>
+{% block css %}
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    }
+    .hero{
+    width: 100%;
+    height: 100vh;
+    background-image: url("https://www.shiftf7.com/wp-content/uploads/2017/08/istock-518556682.jpg");
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    }
+
+  .container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #00FFF9;
+  border-radius: 3rem;
+  width: 33.33%;
+  }
+  .col{
+  display: grid;
+  place-items: center;
+  }
+</style>
+{% endblock %}
