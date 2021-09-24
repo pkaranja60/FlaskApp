@@ -76,13 +76,7 @@ def records_page():
 def login_page():
     form = LoginForm()
     if form.validate_on_submit():
-        attempted_user = User.query.filter_by(username=form.username.data,
-<<<<<<< HEAD
-                                              employee_id=form.employee_id.data,
-=======
-                                              employee_id=form.employee_id.data
->>>>>>> f8a0215bf41cc31eb3088e5d8cf2269437bfdca9
-                                              ).first()
+        attempted_user = User.query.filter_by(username=form.username.data).first()
         if attempted_user and attempted_user.check_password_correction(
                 attempted_password=form.password.data
         ):
