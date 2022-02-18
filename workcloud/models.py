@@ -1,7 +1,5 @@
 import flask_bcrypt
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from sqlalchemy.orm import dynamic
-
 from workcloud import db, login_manager, app
 from flask_login import UserMixin
 
